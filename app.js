@@ -9,7 +9,7 @@ const path = require('path');
 const config = require('./config.js');
 const handleError = require('./tools/handleError');
 const router = require('./routes');
-const dbTables = require('./db/index');
+const dbTables = require('./db/init');
 
 const app = new koa();
 
@@ -23,8 +23,10 @@ app.use(koaBody({
     },
 }));
 app.use(cors());
+
 // Serve static files
 app.use(staticFile(path.join(__dirname, 'public')));
+
 app.use(router.publicApi.routes());
 
 // jwt
@@ -32,16 +34,17 @@ app.use(router.publicApi.routes());
 app.use(jwt({
     secret: config.userKey,
 }).unless({
-    path: [/^\/api\/admin/]
+    path: [/^\/admin\/api/]
 }));
 // admin validate
 app.use(jwt({
     secret: config.adminKey,
 }).unless({
-    path: [/^\/api\/v/]
+    path: [/^\/api/]
 }));
 
 app.use(router.privateApi.routes());
+app.use(router.adminApi.routes());
 
 app.listen(config.port, function (err) {
     if (err)

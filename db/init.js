@@ -4,13 +4,16 @@ const tables = {
     admin: require('./admin'),
 };
 
+const config = require('../config');
+const encryption = require('../tools/encryption');
+
 // init table and data
 sequelize.sync().then(() => {
     tables.admin.findAll().then(v => {
         if (!v.length) {
             tables.admin.create({
                 username: 'felbry',
-                password: '123'
+                password: encryption(config.defaultPwd)
             });
         }
     });

@@ -6,6 +6,7 @@
   "author": "felbry",
   "license": "MIT",
   "dependencies": {
+    "jsonwebtoken": "^8.0.1",
     "kcors": "^2.2.1",
     "koa": "^2.3.0",
     "koa-body": "^2.3.0",

@@ -1,6 +1,6 @@
 module.exports = {
     db: {
-        db: 'campus',
+        db: 'tpl-test',
         user: 'root',
         pw: '0000',
         option: {
@@ -17,4 +17,6 @@ module.exports = {
     userKey: 'user',
     adminKey: 'admin',
     port: 3000,
+    encryMixing: 'felbry',
+    defaultPwd: '0000',
 }

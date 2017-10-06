@@ -2,17 +2,11 @@ const user = require('../model/user');
 
 module.exports = {
     async login (ctx, next) {
-        var result = await user.find();
-        if (!result.code) {
-            ctx.body = result;
-        } else {
-            ctx.throw(500, 'Database operation failed', result.msg);
-        }
+        let result = await user.login(ctx.request.body.fields);
+        ctx.body = result;
     },
     async register (ctx, next) {
-
+        let result = await user.insert(ctx.request.body.fields);
+        ctx.body = result;
     },
-    async getInfo (ctx, next) {
-       
-    }
 }
